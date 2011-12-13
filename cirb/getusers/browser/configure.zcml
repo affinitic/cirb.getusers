@@ -1,0 +1,15 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="cirb.getusers">
+    <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+      for="*"
+      name="get-users"
+      class=".getusersview.GetUsersView"
+      template="getusersview.pt"
+      permission="zope.Public"
+      />
+
+</configure>
