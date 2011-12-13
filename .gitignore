@@ -6,3 +6,5 @@ var
 dist
 bin
 .installed.cfg
+*.mo
+*.*~
