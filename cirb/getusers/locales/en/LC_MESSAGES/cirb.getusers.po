@@ -15,31 +15,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "POT-Creation-Date: Tue Dec 13 12:51:11 2011\n"
-"PO-Revision-Date: 2011-12-13 12:52+0100\n"
+"PO-Revision-Date: 2011-12-13 12:57+0100\n"
 "Last-Translator: bsuttor <bsuttor@cirb.irisnet.be>\n"
-"Language-Team: French\n"
-"Language: fr\n"
+"Language-Team: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: zope/app/locales/extract.py\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cirb.getusers:/browser/getusersview.pt:25
 #: cirb.getusers:/browser/getusersview.pt:33
 msgid "${DYNAMIC_CONTENT}"
-msgstr ""
+msgstr "${DYNAMIC_CONTENT}"
 
 #. Default: "(Required)"
 #: cirb.getusers:/browser/getusersview.pt:26
 msgid "label_required"
-msgstr ""
+msgstr "label_required"
 
 #. Default: "Required"
 #: cirb.getusers:/browser/getusersview.pt:26
 msgid "title_required"
-msgstr ""
+msgstr "title_required"
 
 #: cirb.getusers:/browser/getusersview.py:54
 msgid "Get user list"
-msgstr ""
+msgstr "Get user list"
