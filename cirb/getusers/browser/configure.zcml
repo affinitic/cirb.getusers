@@ -10,7 +10,7 @@
       name="get-users"
       class=".getusersview.GetUsersForm"
       template="getusersview.pt"
-      permission="zope.Public"
+      permission="zope2.ManageUsers"
       />
         
   <utility

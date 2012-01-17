@@ -11,9 +11,9 @@ GETUSERS = PloneWithPackageLayer(
 	    gs_profile_id='cirb.getusers:default',
 	    name="GETUSERS")
 
-NOVAC_INTEGRATION = IntegrationTesting(
+GETUSERS_INTEGRATION = IntegrationTesting(
 	    bases=(GETUSERS,), name="GETUSERS_INTEGRATION")
 
 
-NOVAC_FUNCTIONAL = FunctionalTesting(
+GETUSERS_FUNCTIONAL = FunctionalTesting(
 	    bases=(GETUSERS,), name="GETUSERS_FUNCTIONAL")
