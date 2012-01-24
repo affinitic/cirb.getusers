@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting, FunctionalTesting
 

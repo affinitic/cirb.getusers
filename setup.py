@@ -23,6 +23,11 @@ setup(name='cirb.getusers',
       namespace_packages=['cirb'],
       include_package_data=True,
       zip_safe=False,
+      extras_require = {
+          'test': [
+              'plone.app.testing',
+          ]
+      },
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
