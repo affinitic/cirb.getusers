@@ -11,42 +11,26 @@ from zope.schema.vocabulary import SimpleVocabulary
 from five.formlib.formbase import PageForm
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-		
-class IGetUsersForm(Interface):
-    """
-    Get Users view interface
-    """
-    roles = Choice(title=u'Roles', vocabulary='Available Roles', required=True, default="True")
-    output = Choice(title=u'Output', vocabulary='Available Outputs', required=True, default="Excel")
-    
-def availableRoles(context):
-    subjects = (_(u'True'), _(u'False'), )
-    return SimpleVocabulary.fromValues(subjects)
-
-def availableOutputs(context):
-    #subjects = (_(u'Excel'), _(u'Pdf'), )
-    subjects = (_(u'Excel'),)
-    return SimpleVocabulary.fromValues(subjects)
-
 
 class Users(list):
     """
     Get Users from plone site
     """
-    def __init__(self, membership, roles=False):
+    def __init__(self, membership, roles):
         self.membership = membership
-        if roles == "False" or roles == "Non" or roles == "Nee":
-            self.roles = False
-        else:
-            self.roles = True
-        self.plone_roles = [(0,'Authenticated'), (1,'Site Administrator'), (2,'Member'), (3,'Manager'), (4,'Editor'), (5,'Reader'), (6,'Contributor'), (7,'Reviewer')]
+        self.roles = roles
+        self.plone_roles = self.get_plone_roles()
         self.update_users()
-    
+   
+    def get_plone_roles(self):
+        return ['Authenticated', 'Site Administrator', 'Member', 'Manager', 'Editor','Reader', 'Contributor', 'Reviewer']
+
     def update_users(self):
         for member in self.membership.listMembers():
             # add email
             item = {}
             item['name'] = member.getUserName()
+            item['email'] = member.getProperty('email', None)
             if self.roles:
                 item['roles'] = member.getRoles()
             self.append(item)
@@ -58,12 +42,13 @@ class Users(list):
         users = "%s\n" % self.get_excel_first_line()
         for user in self:
             users += "%s;" % user.get('name')
+            users += "%s;" % user.get('email')
             if self.roles:
                 xls_roles = ["" for x in range(len(self.plone_roles))]
                 for role in user.get('roles'):
-                    for k, v in self.plone_roles:
-                        if role == v:
-                            xls_roles[k] = "X"
+                    for r in self.plone_roles:
+                        if role == r:
+                            xls_roles[self.plone_roles.index(r)] = "X"
                     
                 users += ";".join(xls_roles)
             users += "\n"
@@ -71,28 +56,34 @@ class Users(list):
     
     def get_excel_first_line(self):
         #TODO get translation
-        results = ['Name']
+        results = ['Name', 'Email']
         if self.roles:
-            for k, v in sorted(self.plone_roles):
-                results.append(v)
+            for r in self.plone_roles:
+                results.append(r)
         return ";".join(results)
             
 
 
-class GetUsersForm(PageForm):
-    label = _('Get user list')
-    form_fields = form.Fields(IGetUsersForm)
-    template = ViewPageTemplateFile('getusersview.pt')
-
+class GetUsers(BrowserView):
+    def  __init__(self, context, request):
+        self.context = context
+        self.request = request
+        self.membership = getToolByName(self, "portal_membership")
     
-    @form.action("send")
-    def action_send(self, action, data):
-        roles = data.get('roles', False)
-        membership = getToolByName(self, "portal_membership")
-        RESPONSE = self.request.response
-        users = Users(membership, roles)
-        if data.get('output').lower() == "excel":
-            RESPONSE.setHeader("Content-type","application/ms-excel")
-            RESPONSE.setHeader("Content-disposition","attachment;filename=Users.xls")
+    def get_view(self):
+        return {"view":"view"}
 
+    def get_users(self):
+        self.set_excel_response(self.request.response)
+        users = Users(self.membership, roles=False)
         return users.get_excel_users()
+
+    def get_users_with_roles(self):
+        self.set_excel_response(self.request.response)
+        users = Users(self.membership, roles=True)
+        return users.get_excel_users()
+
+    def set_excel_response(self, RESPONSE):
+        RESPONSE.setHeader("Content-type","application/ms-excel")
+        RESPONSE.setHeader("Content-disposition","attachment;filename=Users.xls")
+

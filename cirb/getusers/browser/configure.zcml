@@ -8,19 +8,25 @@
   <browser:page
       for="*"
       name="get-users"
-      class=".getusersview.GetUsersForm"
+      class=".getusersview.GetUsers"
       template="getusersview.pt"
       permission="zope2.ManageUsers"
       />
+   
+   <browser:page
+      for="*"
+      name="get-users-list"
+      class=".getusersview.GetUsers"
+      attribute="get_users"
+      permission="zope2.ManageUsers"
+      />
+ 
+   <browser:page
+      for="*"
+      name="get-users-list-with-roles"
+      class=".getusersview.GetUsers"
+      attribute="get_users_with_roles"
+      permission="zope2.ManageUsers"
+      />
         
-  <utility
-      component=".getusersview.availableOutputs"
-      name="Available Outputs"
-      provides="zope.schema.interfaces.IVocabularyFactory"
-      />
-    <utility
-      component=".getusersview.availableRoles"
-      name="Available Roles"
-      provides="zope.schema.interfaces.IVocabularyFactory"
-      />
 </configure>
