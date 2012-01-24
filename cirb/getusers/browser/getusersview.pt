@@ -6,10 +6,10 @@ i18n:domain="cirb.getusers">
     <div metal:fill-slot="main" >
         <ul>
             <li>
-                <a href="" tal:attributes="href string:${portal_url}/get-users-list">Get users list</a>
+                <a href="" tal:attributes="href string:${portal_url}/get-users-list" i18n:translate="get-users-list">Get users list</a>
             </li>
             <li>
-                <a href="" tal:attributes="href string:${portal_url}/get-users-list-with-roles">Get users list with roles</a>
+                <a href="" tal:attributes="href string:${portal_url}/get-users-list?roles=true" i18n:translate="get-users-list-with-roles">Get users list with roles</a>
             </li>
         </ul>
     </div>

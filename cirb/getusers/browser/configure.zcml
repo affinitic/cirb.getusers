@@ -20,13 +20,5 @@
       attribute="get_users"
       permission="zope2.ManageUsers"
       />
- 
-   <browser:page
-      for="*"
-      name="get-users-list-with-roles"
-      class=".getusersview.GetUsers"
-      attribute="get_users_with_roles"
-      permission="zope2.ManageUsers"
-      />
         
 </configure>

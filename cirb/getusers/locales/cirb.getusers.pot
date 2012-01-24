@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Tue Dec 13 12:51:11 2011\n"
+"POT-Creation-Date: Tue Jan 24 15:06:11 2012\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope-dev@zope.org>\n"
@@ -23,22 +23,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: zope/app/locales/extract.py\n"
 
-#: cirb.getusers:/browser/getusersview.pt:25
-#: cirb.getusers:/browser/getusersview.pt:33
-msgid "${DYNAMIC_CONTENT}"
+#: cirb.getusers:/browser/getusersview.pt:12
+#. Default: "Get users list with roles"
+msgid "get-users-list-with-roles"
 msgstr ""
 
-#: cirb.getusers:/browser/getusersview.pt:26
-#. Default: "(Required)"
-msgid "label_required"
-msgstr ""
-
-#: cirb.getusers:/browser/getusersview.pt:26
-#. Default: "Required"
-msgid "title_required"
-msgstr ""
-
-#: cirb.getusers:/browser/getusersview.py:54
-msgid "Get user list"
+#: cirb.getusers:/browser/getusersview.pt:9
+#. Default: "Get users list"
+msgid "get-users-list"
 msgstr ""
 

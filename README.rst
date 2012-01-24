@@ -1,8 +1,8 @@
 Introduction
 ============
 
-This product may contain traces of nuts.
-
+This product used to get a user list in a excel format.
+Call 'get-users' view to have plone users list in a csv format
 
 Update i18n 
 ===========

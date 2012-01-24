@@ -38,8 +38,8 @@ class Users(list):
     def get_users(self):
         return self
 
-    def get_excel_users(self):
-        users = "%s\n" % self.get_excel_first_line()
+    def get_csv_users(self):
+        users = "%s\n" % self.get_csv_first_line()
         for user in self:
             users += "%s;" % user.get('name')
             users += "%s;" % user.get('email')
@@ -54,7 +54,7 @@ class Users(list):
             users += "\n"
         return users
     
-    def get_excel_first_line(self):
+    def get_csv_first_line(self):
         #TODO get translation
         results = ['Name', 'Email']
         if self.roles:
@@ -73,17 +73,16 @@ class GetUsers(BrowserView):
     def get_view(self):
         return {"view":"view"}
 
+    #TODO add an args (role) in view
     def get_users(self):
+        roles = False
+        if self.request.form.get('roles') == "true":
+            roles = True
         self.set_excel_response(self.request.response)
-        users = Users(self.membership, roles=False)
-        return users.get_excel_users()
-
-    def get_users_with_roles(self):
-        self.set_excel_response(self.request.response)
-        users = Users(self.membership, roles=True)
-        return users.get_excel_users()
+        users = Users(self.membership, roles)
+        return users.get_csv_users()
 
     def set_excel_response(self, RESPONSE):
         RESPONSE.setHeader("Content-type","application/ms-excel")
-        RESPONSE.setHeader("Content-disposition","attachment;filename=Users.xls")
+        RESPONSE.setHeader("Content-disposition","attachment;filename=UsersFromPloneSite.csv")
 
