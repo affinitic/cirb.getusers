@@ -5,10 +5,6 @@ from Products.CMFCore.utils import getToolByName
 
 from cirb.getusers import getusersMessageFactory as _
 
-from zope.schema import TextLine, Text, Choice
-from zope.formlib import form
-from zope.schema.vocabulary import SimpleVocabulary
-from five.formlib.formbase import PageForm
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
@@ -29,7 +25,7 @@ class Users(list):
         for member in self.membership.listMembers():
             # add email
             item = {}
-            item['name'] = member.getUserName()
+            item['name'] = member.getProperty('fullname', member.getUserName())
             item['email'] = member.getProperty('email', None)
             if self.roles:
                 item['roles'] = member.getRoles()
@@ -62,7 +58,6 @@ class Users(list):
                 results.append(r)
         return ";".join(results)
             
-
 
 class GetUsers(BrowserView):
     def  __init__(self, context, request):
