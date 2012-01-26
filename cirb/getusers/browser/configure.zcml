@@ -20,5 +20,10 @@
       attribute="get_users"
       permission="zope2.ManageUsers"
       />
-        
+   
+   <browser:resourceDirectory
+      name="cirb.getusers.images"
+      directory="images"
+      />         
+
 </configure>

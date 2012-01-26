@@ -1,4 +1,5 @@
 from zope.interface import implements, Interface
+from zope.app.component.hooks import getSite
 
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
@@ -7,6 +8,7 @@ from cirb.getusers import getusersMessageFactory as _
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+import csv
 
 class Users(list):
     """
@@ -19,36 +21,39 @@ class Users(list):
         self.update_users()
    
     def get_plone_roles(self):
-        return ['Authenticated', 'Site Administrator', 'Member', 'Manager', 'Editor','Reader', 'Contributor', 'Reviewer']
+        site = getSite()
+        return [r for r in site.portal_membership.getPortalRoles() if r != 'Owner'] 
 
     def update_users(self):
         for member in self.membership.listMembers():
             # add email
-            item = {}
-            item['name'] = member.getProperty('fullname', member.getUserName())
-            item['email'] = member.getProperty('email', None)
+            user = {}
+            user['name'] = member.getProperty('fullname', member.getUserName())
+            user['email'] = member.getProperty('email', None)
             if self.roles:
-                item['roles'] = member.getRoles()
-            self.append(item)
+                user['roles'] = member.getRoles()
+            self.append(user)
     
     def get_users(self):
         return self
 
     def get_csv_users(self):
-        users = "%s\n" % self.get_csv_first_line()
+        from StringIO import StringIO
+        buf = StringIO()
+        writer = csv.writer(buf, dialect='excel', delimiter=";")
+        writer.writerow(self.get_csv_first_line())
         for user in self:
-            users += "%s;" % user.get('name')
-            users += "%s;" % user.get('email')
+            col = []
+            col.append(user.get('name'))
+            col.append(user.get('email'))
             if self.roles:
-                xls_roles = ["" for x in range(len(self.plone_roles))]
-                for role in user.get('roles'):
-                    for r in self.plone_roles:
-                        if role == r:
-                            xls_roles[self.plone_roles.index(r)] = "X"
-                    
-                users += ";".join(xls_roles)
-            users += "\n"
-        return users
+                for role in self.plone_roles:
+                    if role in user.get('roles', []):
+                        col.append("X")
+                    else:
+                        col.append("")
+            writer.writerow(col)
+        return buf.getvalue()
     
     def get_csv_first_line(self):
         #TODO get translation
@@ -56,7 +61,7 @@ class Users(list):
         if self.roles:
             for r in self.plone_roles:
                 results.append(r)
-        return ";".join(results)
+        return results
             
 
 class GetUsers(BrowserView):
@@ -79,5 +84,4 @@ class GetUsers(BrowserView):
 
     def set_excel_response(self, RESPONSE):
         RESPONSE.setHeader("Content-type","application/ms-excel")
-        RESPONSE.setHeader("Content-disposition","attachment;filename=UsersFromPloneSite.csv")
-
+        RESPONSE.setHeader("Content-disposition","attachment;filename=Users.csv")
