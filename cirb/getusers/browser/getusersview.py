@@ -84,4 +84,4 @@ class GetUsers(BrowserView):
 
     def set_excel_response(self, RESPONSE):
         RESPONSE.setHeader("Content-type","application/ms-excel")
-        RESPONSE.setHeader("Content-disposition","attachment;filename=Users.csv")
+        RESPONSE.setHeader("Content-disposition","attachment;filename=PloneUsers.csv")
