@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel" meta_type="Plone Control Panel Tool" i18n:domain="collective.getusers" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+    <configlet title="User list" action_id="UsersList"
+        appId="collective.getusers" category="Products" condition_expr=""
+        icon_expr="string:$portal_url/++resource++collective.getusers.images/users_export.png"
+        url_expr="string:${portal_url}/@@get-users" visible="True"
+        i18n:attributes="title">
+        <permission>Manage portal</permission>
+    </configlet>
+</object>

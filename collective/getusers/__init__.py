@@ -1,7 +1,7 @@
 # -*- extra stuff goes here -*-
 from zope.i18nmessageid import MessageFactory
 
-getusersMessageFactory = MessageFactory('cirb.getusers')
+getusersMessageFactory = MessageFactory('collective.getusers')
 
 
 def initialize(context):

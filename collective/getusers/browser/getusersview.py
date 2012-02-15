@@ -4,7 +4,7 @@ from zope.app.component.hooks import getSite
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 
-from cirb.getusers import getusersMessageFactory as _
+from collective.getusers import getusersMessageFactory as _
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 

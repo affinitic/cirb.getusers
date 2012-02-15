@@ -1,13 +1,13 @@
 from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import IntegrationTesting, FunctionalTesting
 
-import cirb.getusers
+import collective.getusers
 
 GETUSERS = PloneWithPackageLayer(
 	    zcml_filename="configure.zcml",
-	    zcml_package=cirb.getusers,
+	    zcml_package=collective.getusers,
 	    additional_z2_products=(),
-	    gs_profile_id='cirb.getusers:default',
+	    gs_profile_id='collective.getusers:default',
 	    name="GETUSERS")
 
 GETUSERS_INTEGRATION = IntegrationTesting(

@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import unittest2 as unittest
-from cirb.getusers.browser.getusersview import Users
-from cirb.getusers.testing import GETUSERS_INTEGRATION
+from collective.getusers.browser.getusersview import Users
+from collective.getusers.testing import GETUSERS_INTEGRATION
 
 from plone.app.testing.interfaces import TEST_USER_ID, TEST_USER_NAME, TEST_USER_PASSWORD, TEST_USER_ROLES
 from Products.CMFCore.utils import getToolByName

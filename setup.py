@@ -3,11 +3,11 @@ import os
 
 version = '1.1.dev0'
 
-setup(name='cirb.getusers',
+setup(name='collective.getusers',
       version=version,
       description="call @@get-users to have a users list of your plone site",
       long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+                       open(os.path.join("CHANGES.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
