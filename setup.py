@@ -7,7 +7,7 @@ setup(name='cirb.getusers',
       version=version,
       description="call @@get-users to have a users list of your plone site",
       long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+                       open("CHANGES.txt").read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[

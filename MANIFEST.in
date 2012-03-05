@@ -1,6 +1,6 @@
 include *
 
 recursive-include docs *
-recursive-include collective *
+recursive-include cirb *
 
 global-exclude *pyc
