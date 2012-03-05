@@ -21,7 +21,7 @@ permission="zope2.ManageUsers"
 />
 
 <browser:resourceDirectory
-name="collective.getusers.images"
+name="cirb.getusers.images"
 directory="images"
 />         
 
