@@ -1,22 +1,21 @@
 <configure
-xmlns="http://namespaces.zope.org/zope"
-xmlns:five="http://namespaces.zope.org/five"
-xmlns:i18n="http://namespaces.zope.org/i18n"
-xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-i18n_domain="cirb.getusers">
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="cirb.getusers">
 
-<five:registerPackage package="." initialize=".initialize" />
+    <five:registerPackage package="." initialize=".initialize" />
 
-<genericsetup:registerProfile
-name="default"
-title="collective.getusers"
-directory="profiles/default"
-description="Installs the collective.getusers package"
-provides="Products.GenericSetup.interfaces.EXTENSION"
-/>
-<!-- -*- extra stuff goes here -*- -->
+    <genericsetup:registerProfile
+        name="default"
+        title="cirb.getusers"
+        directory="profiles/default"
+        description="Installs the cirb.getusers package"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
 
-<include package=".browser" />
-<i18n:registerTranslations directory="locales" />
+    <include package=".browser" />
+    <i18n:registerTranslations directory="locales" />
 
 </configure>
