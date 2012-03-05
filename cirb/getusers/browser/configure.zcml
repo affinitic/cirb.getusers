@@ -2,8 +2,7 @@
 xmlns="http://namespaces.zope.org/zope"
 xmlns:five="http://namespaces.zope.org/five"
 xmlns:browser="http://namespaces.zope.org/browser"
-i18n_domain="collective.getusers">
-<!-- -*- extra stuff goes here -*- -->
+i18n_domain="cirb.getusers">
 
 <browser:page
 for="*"
