@@ -1,0 +1,13 @@
+Changelog
+=========
+
+1.1 (unreleased)
+----------------
+
+- I changed the name of this products. It's now collective.getusers. 
+
+
+1.0 (2012-02-03)
+----------------
+
+- Initial release
