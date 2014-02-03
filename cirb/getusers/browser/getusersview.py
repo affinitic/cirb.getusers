@@ -19,21 +19,22 @@ class Users(list):
         self.roles = roles
         self.plone_roles = self.get_plone_roles()
         self.update_users()
-   
+
     def get_plone_roles(self):
         site = getSite()
-        return [r for r in site.portal_membership.getPortalRoles() if r != 'Owner'] 
+        return [r for r in site.portal_membership.getPortalRoles() if r != 'Owner']
 
     def update_users(self):
         for member in self.membership.listMembers():
             # add email
             user = {}
+            user['id'] = member.getId()
             user['name'] = member.getProperty('fullname', member.getUserName())
             user['email'] = member.getProperty('email', None)
             if self.roles:
                 user['roles'] = member.getRoles()
             self.append(user)
-    
+
     def get_users(self):
         return self
 
@@ -44,6 +45,7 @@ class Users(list):
         writer.writerow(self.get_csv_first_line())
         for user in self:
             col = []
+            col.append(user.get('id'))
             col.append(user.get('name'))
             col.append(user.get('email'))
             if self.roles:
@@ -54,15 +56,15 @@ class Users(list):
                         col.append("")
             writer.writerow(col)
         return buf.getvalue()
-    
+
     def get_csv_first_line(self):
         #TODO get translation
-        results = ['Name', 'Email']
+        results = ['Id', 'Name', 'Email']
         if self.roles:
             for r in self.plone_roles:
                 results.append(r)
         return results
-            
+
 
 class GetUsers(BrowserView):
     def  __init__(self, context, request):

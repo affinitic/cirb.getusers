@@ -4,7 +4,7 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- I changed the name of this products. It's now collective.getusers. 
+- Add user id to CSV [gotcha]
 
 
 1.0 (2012-02-03)
