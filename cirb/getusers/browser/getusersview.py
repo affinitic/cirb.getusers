@@ -1,12 +1,7 @@
-.from zope.interface import implements, Interface
 from zope.component.hooks import getSite
 
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
-
-from cirb.getusers import getusersMessageFactory as _
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 import csv
 
@@ -23,7 +18,9 @@ class Users(list):
 
     def get_plone_roles(self):
         site = getSite()
-        return [r for r in site.portal_membership.getPortalRoles() if r != 'Owner']
+        return [
+            r for r in site.portal_membership.getPortalRoles() if r != 'Owner'
+        ]
 
     def update_users(self):
         for member in self.membership.listMembers():
@@ -68,15 +65,14 @@ class Users(list):
 
 
 class GetUsers(BrowserView):
-    def  __init__(self, context, request):
+    def __init__(self, context, request):
         self.context = context
         self.request = request
         self.membership = getToolByName(context, "portal_membership")
 
     def get_view(self):
-        return {"view":"view"}
+        return {"view": "view"}
 
-    #TODO add an args (role) in view
     def get_users(self):
         roles = False
         if self.request.form.get('roles') == "true":
@@ -86,5 +82,8 @@ class GetUsers(BrowserView):
         return users.get_csv_users()
 
     def set_excel_response(self, RESPONSE):
-        RESPONSE.setHeader("Content-type","application/ms-excel")
-        RESPONSE.setHeader("Content-disposition","attachment;filename=PloneUsers.csv")
+        RESPONSE.setHeader("Content-type", "application/ms-excel")
+        RESPONSE.setHeader(
+            "Content-disposition",
+            "attachment;filename=PloneUsers.csv"
+        )
