@@ -19,8 +19,9 @@ class TestUsers(unittest.TestCase):
         member = membership.getMemberById('dummy_userid')
         member.setMemberProperties({'fullname':'dummy', "email":"dummy@user.id"})
         u = Users(membership, False)
-        self.assertEqual(u.get_csv_users(), "Name;Email\r\ndummy;dummy@user.id\r\n;\r\n", 'Number of csv lines is incorrect')
-       
+        lines = u.get_csv_users().splitlines()
+        self.assertEqual(lines[0], "Id;Name;Email")
+        self.assertEqual(lines[1], "dummy_userid;dummy;dummy@user.id")
 
     def test_cross(self):
         portal = self.layer["portal"]
