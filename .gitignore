@@ -8,3 +8,5 @@ bin
 .installed.cfg
 *.mo
 *.*~
+lib
+include
