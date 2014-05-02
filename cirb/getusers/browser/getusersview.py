@@ -4,6 +4,7 @@ from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 
 import csv
+from DateTime import DateTime
 
 
 class Users(list):
@@ -29,6 +30,21 @@ class Users(list):
             user['id'] = member.getId()
             user['name'] = member.getProperty('fullname', member.getUserName())
             user['email'] = member.getProperty('email', None)
+            login_time = member.getProperty('login_time', None)
+            if login_time == DateTime('2000/01/01'):
+                user['login_date'] = ""
+            else:
+                user['login_date'] = login_time.strftime('%d/%m/%Y')
+            last_login_time = member.getProperty(
+                'last_login_time',
+                None
+            )
+            if last_login_time == DateTime('2000/01/01'):
+                user['last_login_date'] = ""
+            else:
+                user['last_login_date'] = last_login_time.strftime('%d/%m/%Y')
+            if user['login_date'] == user['last_login_date']:
+                user['last_login_date'] = ""
             if self.roles:
                 user['roles'] = member.getRoles()
             self.append(user)
@@ -46,6 +62,8 @@ class Users(list):
             col.append(user.get('id'))
             col.append(user.get('name'))
             col.append(user.get('email'))
+            col.append(user.get('login_date'))
+            col.append(user.get('last_login_date'))
             if self.roles:
                 for role in self.plone_roles:
                     if role in user.get('roles', []):
@@ -57,7 +75,10 @@ class Users(list):
 
     def get_csv_first_line(self):
         #TODO get translation
-        results = ['Id', 'Name', 'Email']
+        results = [
+            'Id', 'Name', 'Email', 'Last Login Date',
+            'Previous Login Date'
+        ]
         if self.roles:
             for r in self.plone_roles:
                 results.append(r)

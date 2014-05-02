@@ -31,8 +31,14 @@ class TestUsers(unittest.TestCase):
         )
         u = Users(membership, False)
         lines = u.get_csv_users().splitlines()
-        self.assertEqual(lines[0], "Id;Name;Email")
-        self.assertEqual(lines[1], "dummy_userid;dummy;dummy@user.id")
+        self.assertEqual(
+            lines[0],
+            "Id;Name;Email;Last Login Date;Previous Login Date"
+        )
+        self.assertEqual(
+            lines[1],
+            "dummy_userid;dummy;dummy@user.id;;"
+        )
 
     def test_cross(self):
         portal = self.layer["portal"]
