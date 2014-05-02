@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.1 (unreleased)
-------------------
+1.2 (2014-05-02)
+----------------
 
 - Plone 4 support [gotcha]
 - Fix tests [gotcha]
