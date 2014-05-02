@@ -1,5 +1,5 @@
-from zope.interface import implements, Interface
-from zope.app.component.hooks import getSite
+.from zope.interface import implements, Interface
+from zope.component.hooks import getSite
 
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
